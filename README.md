@@ -44,10 +44,21 @@ Modify configurations using `menuconfig` and then:
 
    This process takes time. Upon completion, the following files will be generated:
    
-- `bin/targets/thead/th1520`
-- `bin/targets/thead/th1520`
+- `build_dir/target-riscv64_riscv64_musl/linux-thead_th1520/tmp/openwrt-thead-th1520-sipeed_lpi4a-ext4-sysupgrade.img.gz.kernel` : boot image
+- `build_dir/target-riscv64_riscv64_musl/linux-thead_th1520/root.ext4` : root image
 
-### 4. Enable WiFi on the Device
+### 4. Flash the images to Lichee Pi 4A
+
+   Assuming it is booting from eMMC:
+
+   ```
+   sudo fastboot flash ram ../<somewhere>/u-boot-with-spl.bin		# u-boot SPL not included in the openwrt build. Find it in the buildroot-th1520
+   sudo fastboot reboot
+   sudo fastboot flash boot build_dir/target-riscv64_riscv64_musl/linux-thead_th1520/tmp/openwrt-thead-th1520-sipeed_lpi4a-ext4-sysupgrade.img.gz.kernel
+   sudo fastboot flash root build_dir/target-riscv64_riscv64_musl/linux-thead_th1520/root.ext4
+   ```
+
+### 5. Enable WiFi on the Device
 
 After flashing the kernel and root filesystem, WiFi is disabled by default. To enable it, access the console of x2000 device:
 
