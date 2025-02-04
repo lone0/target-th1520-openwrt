@@ -46,7 +46,8 @@ define Device/Default
   PROFILES := Default
   KERNEL := kernel-bin
   IMAGES := sysupgrade.img.gz
-  DEVICE_DTS = thead/th1520-lichee-pi-4a
+  DEVICE_DTS := thead/th1520-lichee-pi-4a
+  DEVICE_PACKAGES := wpad-basic-mbedtls kmod-rtw88-8723ds kmod-rtw88-sdio rtl8723de-firmware
 endef
 
 include $(SUBTARGET).mk
