@@ -1,5 +1,4 @@
 ARCH:=riscv64
-SUBTARGET:=th1520
 BOARDNAME:=Sipeed LicheePi 4A riscv64
 CPU_TYPE:=riscv64
 

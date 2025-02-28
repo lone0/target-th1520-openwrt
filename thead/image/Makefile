@@ -47,7 +47,7 @@ define Device/Default
   KERNEL := kernel-bin
   IMAGES := sysupgrade.img.gz
   DEVICE_DTS := thead/th1520-lichee-pi-4a
-  DEVICE_PACKAGES := wpad-basic-mbedtls kmod-rtw88-8723ds kmod-rtw88-sdio rtl8723de-firmware
+  DEVICE_PACKAGES := wpad-basic-mbedtls kmod-rtlsdio-8723ds rtl8723de-firmware
 endef
 
 include $(SUBTARGET).mk
