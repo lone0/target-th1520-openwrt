@@ -26,9 +26,10 @@ This repo adds a target to OpenWrt for TH1520 SoC
  base-files  config-6.6  image  Makefile  patches-6.6  th1520
  ```
 
-### 3. Build the code
+### 3. Patch and Build the code
 
    ```base
+   cp -a feeds/thead/package-patches/* .
    cp target/linux/feeds/thead/licheepi4a_defconfig .config
    make defconfig
    make menuconfig

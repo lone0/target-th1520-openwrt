@@ -1,0 +1,27 @@
+diff -ur a/drivers/net/wireless/realtek/rtw88/main.c b/drivers/net/wireless/realtek/rtw88/main.c
+--- a/drivers/net/wireless/realtek/rtw88/main.c	2025-03-19 21:02:00.479744012 +0800
++++ b/drivers/net/wireless/realtek/rtw88/main.c	2025-03-19 20:53:29.796272912 +0800
+@@ -2228,7 +2228,7 @@
+ 
+ int rtw_register_hw(struct rtw_dev *rtwdev, struct ieee80211_hw *hw)
+ {
+-	bool sta_mode_only = rtwdev->hci.type == RTW_HCI_TYPE_SDIO;
++	bool sta_mode_only = false; //rtwdev->hci.type == RTW_HCI_TYPE_SDIO;
+ 	struct rtw_hal *hal = &rtwdev->hal;
+ 	int max_tx_headroom = 0;
+ 	int ret;
+diff -ur a/drivers/net/wireless/realtek/rtw88/sdio.c b/drivers/net/wireless/realtek/rtw88/sdio.c
+--- a/drivers/net/wireless/realtek/rtw88/sdio.c	2025-03-19 21:02:00.451742245 +0800
++++ b/drivers/net/wireless/realtek/rtw88/sdio.c	2025-03-19 22:29:38.989713941 +0800
+@@ -1227,7 +1227,10 @@
+ 
+ 	if (queue <= RTW_TX_QUEUE_VO)
+ 		rtw_sdio_indicate_tx_status(rtwdev, skb);
+-	else
++	else if (queue == RTW_TX_QUEUE_MGMT) {
++		IEEE80211_SKB_CB(skb)->flags |= IEEE80211_TX_STAT_ACK;
++		ieee80211_tx_status_irqsafe(rtwdev->hw, skb);
++	} else
+ 		dev_kfree_skb_any(skb);
+ }
+ 
